@@ -1,0 +1,30 @@
+# [YOUR OSFI COMPLIANCE COMMENT HERE — min. 2 sentences explaining
+#  how this pipeline supports Ben Secure's audit requirement]
+# Using GitHub Actions to run pytest ensures that we move from 'trust-based deployments' (where we hope no one breaks anything) to 'control-based deployments' (where the pipeline proves the code is safe before it touches the bank's production servers).
+name: YMB Banking App CI Pipeline
+ 
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+ 
+jobs:
+  test:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+ 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+ 
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+ 
+      - name: Run pytest
