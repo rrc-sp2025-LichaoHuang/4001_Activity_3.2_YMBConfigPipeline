@@ -28,3 +28,5 @@ jobs:
           pip install pytest
  
       - name: Run pytest
+        run: pytest test_main.py -v
+
